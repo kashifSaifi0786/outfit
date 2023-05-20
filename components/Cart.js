@@ -7,11 +7,16 @@ import {
   CardInfo,
   EmptyStyle,
   Checkout,
+  Cancle,
 } from "@/styles/CartStyle";
 import { Quantity } from "@/styles/ProductDetails";
 import { useStateContext } from "@/lib/context";
 import { FaShoppingCart } from "react-icons/fa";
-import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
+import {
+  AiFillMinusCircle,
+  AiFillPlusCircle,
+  AiOutlineClose,
+} from "react-icons/ai";
 import getStripe from "@/lib/getStripe";
 
 const cards = {
@@ -62,6 +67,9 @@ export default function Cart() {
         transition={{ type: "tween" }}
         onClick={(e) => e.stopPropagation()}
       >
+        <Cancle onClick={() => setShowCart(false)}>
+          <AiOutlineClose />
+        </Cancle>
         {cartItems.length < 1 && (
           <EmptyStyle
             initial={{ opacity: 0, scale: 0.8 }}

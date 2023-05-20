@@ -20,6 +20,16 @@ export const CartStyle = styled(motion.div)`
   padding: 2rem 2rem;
   overflow-y: scroll;
   position: relative;
+
+  @media (max-width: 1024px) {
+    width: 45%;
+  }
+  @media (max-width: 768px) {
+    width: 60%;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 export const Card = styled(motion.div)`
@@ -48,14 +58,14 @@ export const CardInfo = styled(motion.div)`
 
 export const EmptyStyle = styled(motion.div)`
   position: absolute;
-  top: 0;
+  top: 20%;
   transform: translate(-45%, 0%);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 80%;
   h1 {
     font-size: 2rem;
     padding: 2rem 0rem;
@@ -78,6 +88,16 @@ export const Checkout = styled(motion.div)`
   button:disabled {
     background: var(--secondary);
     cursor: not-allowed;
+  }
+`;
+
+export const Cancle = styled.div`
+  text-align: end;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1;
+  @media (min-width: 480px) {
+    display: none;
   }
 `;
 
