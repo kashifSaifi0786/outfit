@@ -75,6 +75,10 @@ export const Checkout = styled(motion.div)`
     margin-top: 2rem;
     cursor: pointer;
   }
+  button:disabled {
+    background: var(--secondary);
+    cursor: not-allowed;
+  }
 `;
 
 export const Cards = styled(motion.div)``;

@@ -7,18 +7,24 @@ import toast from "react-hot-toast";
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
+  const route = useRouter();
   const { query } = useRouter();
   const { qty, setQty, increaseQty, decreaseQty, handleAdd } =
     useStateContext();
 
   useEffect(() => {
     setQty(1);
-    fetch(`${process.env.NEXT_PUBLIC_API}products/find/${query.id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data);
-      });
   }, []);
+
+  useEffect(() => {
+    if (route.isReady) {
+      fetch(`${process.env.NEXT_PUBLIC_API}products/find/${query.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProduct(data);
+        });
+    }
+  }, [route.isReady]);
 
   const notify = () => {
     toast.success(`${product.title} was added to cart`, { duration: 1500 });

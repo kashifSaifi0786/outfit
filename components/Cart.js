@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   CartWrapper,
   CartStyle,
@@ -32,8 +33,10 @@ const card = {
 export default function Cart() {
   const { cartItems, setShowCart, handleAdd, handleRemove, totalPrice } =
     useStateContext();
+  const [loading, setLoading] = useState(false);
 
   const handleCheckout = async () => {
+    setLoading(true);
     const stripe = await getStripe();
     const response = await fetch("/api/stripe", {
       method: "POST",
@@ -42,6 +45,7 @@ export default function Cart() {
     });
     const data = await response.json();
     await stripe.redirectToCheckout({ sessionId: data.id });
+    setLoading(false);
   };
 
   return (
@@ -90,9 +94,11 @@ export default function Cart() {
           ))}
         </Cards>
         {cartItems.length > 0 && (
-          <Checkout onClick={handleCheckout} layout>
+          <Checkout layout>
             <h3>Subtotal: {totalPrice}</h3>
-            <button>purchase</button>
+            <button onClick={handleCheckout} disabled={loading}>
+              {loading ? "processig" : "purchase"}
+            </button>
           </Checkout>
         )}
       </CartStyle>
