@@ -32,11 +32,6 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
 @media only screen and (max-width: 480px) {
   body {
     margin: 0;
