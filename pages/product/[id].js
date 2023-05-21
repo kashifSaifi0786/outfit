@@ -17,13 +17,19 @@ export default function ProductDetails() {
   }, []);
 
   useEffect(() => {
-    if (route.isReady) {
-      fetch(`${process.env.NEXT_PUBLIC_API}products/find/${query.id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setProduct(data);
-        });
-    }
+    const getData = async () => {
+      if (route.isReady) {
+        await fetch(`${process.env.NEXT_PUBLIC_API}products/find/${query.id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setProduct(data);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      }
+    };
+    getData();
   }, [route.isReady]);
 
   const notify = () => {

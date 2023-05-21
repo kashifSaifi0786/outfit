@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import { Inter } from "next/font/google";
 import Product from "@/components/Product";
 import { Gallery } from "@/styles/Gallery";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -24,7 +27,7 @@ export default function Home() {
 
   if (loading)
     return (
-      <div style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</div>
+      <h1 style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</h1>
     );
 
   return (
