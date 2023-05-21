@@ -24,7 +24,7 @@ export default function Home() {
 
   if (loading)
     return (
-      <h1 style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</h1>
+      <div style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</div>
     );
 
   return (
