@@ -1,22 +1,31 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import Product from "@/components/Product";
 import { Gallery } from "@/styles/Gallery";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API}products`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-      });
+    const getData = async () => {
+      setLoading(true);
+      await fetch(`${process.env.NEXT_PUBLIC_API}products`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProducts(data);
+        })
+        .catch((err) => console.log(err.message));
+      setLoading(false);
+    };
+    getData();
   }, []);
+
+  if (loading)
+    return (
+      <h1 style={{ textAlign: "center", marginTop: "2rem" }}>Loading...</h1>
+    );
 
   return (
     <>
